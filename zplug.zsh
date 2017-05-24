@@ -8,37 +8,27 @@ fi
 source ~/.zplug/init.zsh
 
 # Environment
-zplug "modules/environment", from:zim
-zplug "modules/directory", from:zim
-zplug "modules/history", from:zim
-zplug "modules/utility", from:zim
-zplug "modules/editor", from:prezto
+zplug "modules/environment", from:prezto
+zplug "modules/utility", from:prezto
+zplug "modules/terminal", from:prezto
+zplug "modules/directory", from:prezto
+zplug "modules/history", from:prezto
 
 # Utility
-zplug "b4b4r07/enhancd", use:init.sh
-zplug "junegunn/fzf-bin", \
-    as:command, \
-    from:gh-r, \
-    rename-to:"fzf"
-zplug "monochromegane/the_platinum_searcher", \
-    as:command, \
-    from:gh-r, \
-    rename-to:"pt"
-zplug "github/hub", \
-    as:command, \
-    from:gh-r, \
-    hook-load:"$(~/.zplug/bin/hub alias -s)"
+zplug "modules/archive", from:prezto
 
 # Prompt
-zplug "mafredri/zsh-async", on:sindresorhus/pure
-zplug "sindresorhus/pure"
+zplug "mafredri/zsh-async", on:kepbod/pure
+zplug "kepbod/pure", use:pure.zsh, as:theme
 
 # Fish like feature
-zplug "modules/syntax-highlighting", from:zim
-zplug "modules/history-substring-search", from:zim
-zplug "modules/completion", from:zim
+zplug "zsh-users/zsh-syntax-highlighting", defer:2
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-completions"
 zplug "zsh-users/zsh-autosuggestions"
 
+# Language
+zplug "modules/python", from:prezto
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
@@ -52,8 +42,3 @@ fi
 
 # Source packages and add commands to $PATH
 zplug load
-
-if zplug check modules/editor; then
-    zstyle ':prezto:module:editor' key-bindings 'emacs'
-fi
-
