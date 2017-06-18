@@ -10,6 +10,7 @@ source ~/.zplug/init.zsh
 # Environment
 zplug "modules/environment", from:prezto
 zplug "modules/utility", from:prezto
+zplug "modules/editor", from:prezto
 zplug "modules/terminal", from:prezto
 zplug "modules/directory", from:prezto
 zplug "modules/history", from:prezto
@@ -22,10 +23,11 @@ zplug "mafredri/zsh-async", on:kepbod/pure
 zplug "kepbod/pure", use:pure.zsh, as:theme
 
 # Fish like feature
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-history-substring-search"
-zplug "zsh-users/zsh-completions"
-zplug "zsh-users/zsh-autosuggestions"
+zplug "modules/completion", from:prezto
+zplug "modules/history-substring-search", from:prezto, defer:1
+zplug "modules/syntax-highlighting", from:prezto, defer:2
+zplug "modules/autosuggestions", from:prezto, defer:3
+
 
 # Language
 zplug "modules/python", from:prezto

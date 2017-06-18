@@ -1,43 +1,21 @@
-# Vi mode
-bindkey -v
+# Auto set the tab and window titles.
+zstyle ':prezto:module:terminal' auto-title 'yes'
 
-# Key-bindings
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-bindkey '^P' history-substring-search-up
-bindkey '^N' history-substring-search-down
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
-bindkey '^F' vi-forward-word
-bindkey '^B' vi-backward-word
+# Set the window title format.
+zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
 
-# Let prompt show vi mode
-VIM_PROMPT="❯"
-PROMPT='%(?.%F{magenta}.%F{red})${VIM_PROMPT}%f '
+# Set the tab title format.
+zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
 
-prompt_pure_update_vim_prompt() {
-    zle || {
-        print "error: pure_update_vim_prompt must be called when zle is active"
-        return 1
-    }
-    VIM_PROMPT=${${KEYMAP/vicmd/❮}/(main|viins)/❯}
-    zle .reset-prompt
-}
+# Set the terminal multiplexer title format.
+zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
 
-function zle-line-init zle-keymap-select {
-    prompt_pure_update_vim_prompt
-}
-zle -N zle-line-init
-zle -N zle-keymap-select
+# Set syntax highlighters.
+zstyle ':prezto:module:syntax-highlighting' highlighters \
+  'main' \
+  'brackets' \
+  'pattern'
 
-# Active syntax highlightsers
-ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets pattern)
-ZSH_HIGHLIGHT_PATTERNS+=('rm -rf *' 'fg=white,bold,bg=red')
-
-# Set up history substring search
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_FOUND='bg=magenta,fg=white,bold'
-HISTORY_SUBSTRING_SEARCH_HIGHLIGHT_NOT_FOUND='bg=red,fg=white,bold'
-HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS='i'
-HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS="${HISTORY_SUBSTRING_SEARCH_GLOBBING_FLAGS//i}"
+# Set syntax pattern styles.
+zstyle ':prezto:module:syntax-highlighting' pattern \
+  'rm*-rf*' 'fg=white,bold,bg=red'
