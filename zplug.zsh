@@ -6,6 +6,7 @@ fi
 
 # Load zplug
 source ~/.zplug/init.zsh
+zplug 'zplug/zplug', hook-build:'zplug --self-manage'
 
 # Environment
 zplug "modules/environment", from:prezto
@@ -24,13 +25,13 @@ zplug "kepbod/pure", use:pure.zsh, as:theme
 
 # Fish like feature
 zplug "modules/completion", from:prezto
-zplug "modules/history-substring-search", from:prezto, defer:1
-zplug "modules/syntax-highlighting", from:prezto, defer:2
-zplug "modules/autosuggestions", from:prezto, defer:3
-
+zplug "modules/history-substring-search", from:prezto
+zplug "modules/syntax-highlighting", from:prezto
+zplug "modules/autosuggestions", from:prezto
 
 # Language
 zplug "modules/python", from:prezto
+zplug "modules/git", from:prezto
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then

@@ -1,3 +1,9 @@
+# Vi mode
+zstyle ':prezto:module:editor' key-bindings 'vi'
+
+# Auto convert .... to ../..
+zstyle ':prezto:module:editor' dot-expansion 'yes'
+
 # Auto set the tab and window titles.
 zstyle ':prezto:module:terminal' auto-title 'yes'
 
