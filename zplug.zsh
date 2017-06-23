@@ -18,6 +18,7 @@ zplug "modules/history", from:prezto
 
 # Utility
 zplug "modules/archive", from:prezto
+zplug "github/hub", use:"etc/*zsh", if:"which hub"
 
 # Prompt
 zplug "mafredri/zsh-async", on:kepbod/pure
@@ -25,7 +26,7 @@ zplug "kepbod/pure", use:pure.zsh, as:theme
 
 # Fish like feature
 zplug "modules/completion", from:prezto
-zplug "modules/history-substring-search", from:prezto
+zplug "modules/history-substring-search", from:prezto, defer:1
 zplug "modules/syntax-highlighting", from:prezto
 zplug "modules/autosuggestions", from:prezto
 
