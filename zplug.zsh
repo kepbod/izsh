@@ -20,19 +20,14 @@ zplug "modules/history", from:prezto
 zplug "modules/archive", from:prezto
 zplug "github/hub", use:"etc/*zsh", if:"which hub"
 
-# Language
-zplug "modules/python", from:prezto
-zplug "modules/git", from:prezto
-
 # Fish like feature
 zplug "modules/completion", from:prezto
-zplug "modules/history-substring-search", from:prezto, defer:1
-zplug "modules/syntax-highlighting", from:prezto
-zplug "modules/autosuggestions", from:prezto
+zplug "modules/syntax-highlighting", from:prezto, defer:1
+zplug "modules/history-substring-search", from:prezto, defer:2
+zplug "modules/autosuggestions", from:prezto, defer:3
 
 # Prompt
-zplug "mafredri/zsh-async", on:kepbod/pure
-zplug "kepbod/pure", use:pure.zsh, as:theme
+zplug "denysdovhan/spaceship-zsh-theme", use:spaceship.zsh, as:theme, defer:3
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
