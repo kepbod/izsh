@@ -4,7 +4,6 @@ SPACESHIP_PROMPT_ORDER=(
     host          # Hostname section
     dir           # Current directory section
     git           # Git section (git_branch + git_status)
-    hg            # Mercurial section (hg_branch  + hg_status)
     conda         # conda virtualenv section
     exec_time     # Execution time
     line_sep      # Line break
@@ -12,7 +11,19 @@ SPACESHIP_PROMPT_ORDER=(
     char          # Prompt character
 )
 
+# general
 SPACESHIP_PROMPT_SYMBOL="❯"
+
+# user
+SPACESHIP_USER_PREFIX=""
+
+# git
+SPACESHIP_GIT_SYMBOL=""
+SPACESHIP_GIT_BRANCH_PREFIX="$SPACESHIP_GIT_SYMBOL"
+
+# exec_time
+SPACESHIP_EXEC_TIME_PREFIX=""
+
 
 # vi-mode
 SPACESHIP_VI_MODE_INSERT="❯"
