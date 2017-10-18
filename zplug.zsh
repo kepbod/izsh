@@ -18,6 +18,8 @@ zplug "modules/history", from:prezto
 
 # Utility
 zplug "modules/archive", from:prezto
+zplug "rupa/z", use:z.sh
+zplug "changyuheng/fz", defer:1, if:"which fzf"
 zplug "github/hub", use:"etc/*zsh", if:"which hub"
 
 # Fish like feature
