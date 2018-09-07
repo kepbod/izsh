@@ -1,40 +1,14 @@
-# order
-SPACESHIP_PROMPT_ORDER=(
-    dir           # Current directory section
-    user          # Username section
-    host          # Hostname section
-    conda         # conda virtualenv section
-    git           # Git section (git_branch + git_status)
-    exec_time     # Execution time
-    line_sep      # Line break
-    vi_mode       # Vi-mode indicator
-    char          # Prompt character
-)
-
-# general
-SPACESHIP_PROMPT_SYMBOL="❯"
-
-# user
-SPACESHIP_USER_PREFIX=""
-SPACESHIP_USER_SUFFIX=""
-
-# host
-SPACESHIP_HOST_PREFIX="@"
-
-# git
-SPACESHIP_GIT_PREFIX=""
-SPACESHIP_GIT_SYMBOL=""
-SPACESHIP_GIT_BRANCH_PREFIX="$SPACESHIP_GIT_SYMBOL"
-SPACESHIP_GIT_STATUS_PREFIX=""
-SPACESHIP_GIT_STATUS_SUFFIX=""
-
-# conda
-SPACESHIP_CONDA_PREFIX=""
-
-# exec_time
-SPACESHIP_EXEC_TIME_PREFIX=""
-
-# vi-mode
-SPACESHIP_VI_MODE_INSERT="❯"
-SPACESHIP_VI_MODE_NORMAL="☿"
-SPACESHIP_VI_MODE_SUFFIX=""
+# Match the terminal-cursor to the current vi-mode
+autoload -Uz add-zsh-hook add-zle-hook-widget
+add-zle-hook-widget  line-init      set-vi-mode-terminal-cursor
+add-zle-hook-widget  keymap-select  set-vi-mode-terminal-cursor
+set-vi-mode-terminal-cursor () {
+   case $KEYMAP in
+      vicmd) echo -ne '\e[1 q';; # block cursor
+      viins|main|*) echo -ne '\e[5 q';; # bar cursor
+   esac
+}
+add-zsh-hook         preexec        reset-vi-mode-terminal-cursor
+reset-vi-mode-terminal-cursor () {
+   echo -ne '\e[1 q'
+}

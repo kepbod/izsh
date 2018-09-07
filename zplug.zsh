@@ -18,16 +18,18 @@ zplug "modules/history", from:prezto
 
 # Utility
 zplug "modules/archive", from:prezto
+zplug "hlissner/zsh-autopair", defer:2
 zplug 'wfxr/forgit', defer:1
 
 # Fish like feature
 zplug "modules/completion", from:prezto, defer:1
-zplug "modules/syntax-highlighting", from:prezto, defer:2
 zplug "modules/history-substring-search", from:prezto, defer:3
 zplug "modules/autosuggestions", from:prezto
+zplug "zdharma/fast-syntax-highlighting", defer:3
 
 # Prompt
-zplug "denysdovhan/spaceship-zsh-theme", use:spaceship.zsh, as:theme
+zplug "mafredri/zsh-async", from:github
+zplug "sindresorhus/pure", from:github, use:pure.zsh, as:theme
 
 # Install packages that have not been installed yet
 if ! zplug check --verbose; then
