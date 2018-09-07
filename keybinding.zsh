@@ -38,3 +38,7 @@ for m in visual viopp; do
         bindkey -M $m $c select-bracketed
 	done
 done
+
+# Enable cdr
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
