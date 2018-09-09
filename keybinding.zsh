@@ -34,7 +34,11 @@ done
 autoload -U select-bracketed
 zle -N select-bracketed
 for m in visual viopp; do
-	for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+    for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
         bindkey -M $m $c select-bracketed
-	done
+    done
 done
+
+# Enable cdr
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs

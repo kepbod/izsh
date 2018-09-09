@@ -18,3 +18,6 @@ zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
 
 # Disable autopair first
 AUTOPAIR_INHIBIT_INIT=1
+
+# Set fast syntax theme
+FAST_THEME_NAME='clean'
