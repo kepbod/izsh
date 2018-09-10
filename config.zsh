@@ -21,3 +21,6 @@ AUTOPAIR_INHIBIT_INIT=1
 
 # Enable fast vi-mode
 KEYTIMEOUT=1
+
+# Set fast syntax theme
+FAST_THEME_NAME='clean'
