@@ -8,9 +8,6 @@ for keymap in 'emacs' 'viins'; do
     bindkey -M "$keymap" "$key_info[Control]B" vi-backward-word
 done
 
-# Enable autopair
-autopair-init
-
 # Enable surround
 autoload -Uz surround
 zle -N delete-surround surround
