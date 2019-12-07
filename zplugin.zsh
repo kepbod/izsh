@@ -41,9 +41,6 @@ zplugin load djui/alias-tips
 ## zsh-autopair
 zplugin ice wait lucid
 zplugin load hlissner/zsh-autopair
-## exa
-zplugin ice lucid from'gh-r' as'program' mv'exa* -> exa'
-zplugin light ogham/exa
 ## forgit
 zplugin ice wait lucid
 zplugin load wfxr/forgit

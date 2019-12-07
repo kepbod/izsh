@@ -18,6 +18,3 @@ zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
 
 # Enable fast vi-mode
 KEYTIMEOUT=1
-
-# Set fast syntax theme
-FAST_THEME_NAME='clean'
