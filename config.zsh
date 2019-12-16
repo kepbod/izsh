@@ -18,3 +18,13 @@ zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
 
 # Enable fast vi-mode
 KEYTIMEOUT=1
+
+# Platform
+if [[ "$(uname)" == "Darwin" ]]; then
+PICK="*darwin*"
+alias dircolors="gdircolors"
+elif [[ "$(uname)" == "Linux" ]]; then
+PICK="*musl*"
+elif [[ "$(uname)" == "MINGW32_NT" ]]; then
+PICK="*windows*"
+fi

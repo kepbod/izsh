@@ -1,11 +1,29 @@
 # Check if zplugin is installed
-if [[ ! -d ~/.zplugin ]]; then
-    mkdir ~/.zplugin
-    git clone https://github.com/zdharma/zplugin.git ~/.zplugin/bin
+ZPLUGIN="$HOME/.zplugin"
+ZPLUGIN_GIT="https://github.com/zdharma/zplugin.git"
+ZPLUGIN_MODULE="$HOME/.zplugin/bin/zmodules/Src/zdharma/zplugin.so"
+
+if [ ! -d "$ZPLUGIN" ]; then
+    echo "Installing zplugin ..."
+    if [ -x "$(which git)" ]; then
+        mkdir -p "$ZPLUGIN" 2> /dev/null
+        git clone "$ZPLUGIN_GIT" "$ZPLUGIN/bin"
+        source $ZPLUGIN/bin/zplugin.zsh
+        zplugin module build
+    else
+        echo "ERROR: please install git before installation !!"
+    fi
+    if [ ! $? -eq 0 ]; then
+        echo ""
+        echo "ERROR: downloading zplugin ($ZPLUGIN_GIT) failed !!"
+        rm -rf $ZPLUGIN
+    fi;
 fi
 
 # Load zplugin
-source ~/.zplugin/bin/zplugin.zsh
+module_path+=("$ZPLUGIN/bin/zmodules/Src")
+zmodload zdharma/zplugin
+source $ZPLUGIN/bin/zplugin.zsh
 
 # Zplugin related
 zplugin light zdharma/z-p-submods
@@ -30,7 +48,7 @@ zplugin snippet PZT::modules/directory
 zplugin ice svn silent
 zplugin snippet PZT::modules/history
 ## LS_COLORS
-zplugin ice lucid atclone"gdircolors -b LS_COLORS > clrs.zsh" \
+zplugin ice lucid atclone"dircolors -b LS_COLORS > clrs.zsh" \
     atpull'%atclone' pick"clrs.zsh" nocompile'!' \
     atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
 zplugin light trapd00r/LS_COLORS
@@ -49,15 +67,36 @@ zplugin load hlissner/zsh-autopair
 ## archive
 zplugin ice svn silent pick""
 zplugin snippet PZT::modules/archive
+## fzf
+if [ ! -x "$(which fzf)" ]; then
+    zplugin ice from"gh-r" as"program"
+    zplugin light junegunn/fzf-bin
+fi
 ## lsd
-zplugin ice lucid as"command" from"gh-r" mv"lsd* -> lsd" pick"lsd/lsd"
-zplugin light Peltoche/lsd
+if [ ! -x "$(which lsd)" ]; then
+    zplugin ice lucid as"command" from"gh-r" bpick"$PICK" mv"lsd* -> lsd" pick"lsd/lsd"
+    zplugin light Peltoche/lsd
+fi
 ## bat
-zplugin ice lucid as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
-zplugin light sharkdp/bat
+if [ ! -x "$(which bat)" ]; then
+    zplugin ice lucid as"command" from"gh-r" bpick"$PICK" mv"bat* -> bat" pick"bat/bat"
+    zplugin light sharkdp/bat
+fi
+## fd
+if [ ! -x "$(which fd)" ]; then
+    zplugin ice lucid as"command" from"gh-r" bpick"$PICK" mv"fd* -> fd" pick"fd/fd"
+    zplugin light sharkdp/fd
+fi
+## rg
+if [ ! -x "$(which rg)" ]; then
+    zplugin ice lucid as"command" from"gh-r" bpick"$PICK" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
+    zplugin light BurntSushi/ripgrep
+fi
 ## delta
-zplugin ice lucid as"command" from"gh-r" mv"delta* -> delta" pick"delta/delta"
-zplugin light dandavison/delta
+if [ ! -x "$(which delta)" ]; then
+    zplugin ice lucid as"command" from"gh-r" bpick"$PICK" mv"delta* -> delta" pick"delta/delta"
+    zplugin light dandavison/delta
+fi
 ## forgit
 zplugin ice wait lucid
 zplugin load wfxr/forgit
