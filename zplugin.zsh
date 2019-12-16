@@ -29,9 +29,14 @@ zplugin snippet PZT::modules/directory
 ## history
 zplugin ice svn silent
 zplugin snippet PZT::modules/history
+## LS_COLORS
+zplugin ice lucid atclone"gdircolors -b LS_COLORS > clrs.zsh" \
+    atpull'%atclone' pick"clrs.zsh" nocompile'!' \
+    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
+zplugin light trapd00r/LS_COLORS
 
 # Prompt
-zplugin ice pick"async.zsh" src"pure.zsh"
+zplugin ice lucid pick"async.zsh" src"pure.zsh"
 zplugin light sindresorhus/pure
 
 # Utility
@@ -41,15 +46,24 @@ zplugin load djui/alias-tips
 ## zsh-autopair
 zplugin ice wait lucid
 zplugin load hlissner/zsh-autopair
+## archive
+zplugin ice svn silent pick""
+zplugin snippet PZT::modules/archive
+## lsd
+zplugin ice lucid as"command" from"gh-r" mv"lsd* -> lsd" pick"lsd/lsd"
+zplugin light Peltoche/lsd
+## bat
+zplugin ice lucid as"command" from"gh-r" mv"bat* -> bat" pick"bat/bat"
+zplugin light sharkdp/bat
+## delta
+zplugin ice lucid as"command" from"gh-r" mv"delta* -> delta" pick"delta/delta"
+zplugin light dandavison/delta
 ## forgit
 zplugin ice wait lucid
 zplugin load wfxr/forgit
-## zsh-diff-so-fancy
-zplugin ice wait lucid as"program" pick"bin/git-dsf"
-zplugin light zdharma/zsh-diff-so-fancy
-## archive
-zplugin ice svn silent pick''
-zplugin snippet PZT::modules/archive
+## formarks
+zplugin ice wait lucid
+zplugin load wfxr/formarks
 
 # Fish like feature
 ## completion
