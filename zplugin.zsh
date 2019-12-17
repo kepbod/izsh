@@ -21,8 +21,6 @@ if [ ! -d "$ZPLUGIN" ]; then
 fi
 
 # Load zplugin
-module_path+=("$ZPLUGIN/bin/zmodules/Src")
-zmodload zdharma/zplugin
 source $ZPLUGIN/bin/zplugin.zsh
 
 # Zplugin related
