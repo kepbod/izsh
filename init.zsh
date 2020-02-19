@@ -13,6 +13,6 @@ zstyle ':prezto:load' zfunction 'zargs' 'zmv'
 # Load other setting
 IZSH_DIR=${ZDOTDIR:-$HOME}/.izsh
 source $IZSH_DIR/config.zsh
-source $IZSH_DIR/zplugin.zsh
+source $IZSH_DIR/plugin.zsh
 source $IZSH_DIR/keybinding.zsh
 source $IZSH_DIR/alias.zsh
