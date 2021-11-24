@@ -1,6 +1,6 @@
 # Check if zinit is installed
 ZINIT="$HOME/.zinit"
-ZINIT_GIT="https://github.com/zdharma/zinit.git"
+ZINIT_GIT="https://github.com/zdharma-continuum/zinit.git"
 
 if [ ! -d "$ZINIT" ]; then
     echo "Installing zinit ..."
@@ -23,7 +23,7 @@ fi
 source $ZINIT/bin/zinit.zsh
 
 # zinit related
-zinit light zdharma/z-p-submods
+zinit light zdharma-continuum/zinit-annex-submods
 
 # Environment
 ## environment
@@ -113,7 +113,7 @@ zinit ice svn silent submods"zsh-users/zsh-history-substring-search -> external"
 zinit snippet PZT::modules/history-substring-search
 ## history-search-multi-word
 zinit ice wait"1" lucid
-zinit load zdharma/history-search-multi-word
+zinit load zdharma-continuum/history-search-multi-word
 ## fast-syntax-highlighting
 zinit ice wait"1" lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
-zinit light zdharma/fast-syntax-highlighting
+zinit light zdharma-continuum/fast-syntax-highlighting
