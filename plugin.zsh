@@ -7,15 +7,14 @@ if [ ! -d "$ZINIT" ]; then
     if [ -x "$(which git)" ]; then
         mkdir -p "$ZINIT" 2> /dev/null
         git clone "$ZINIT_GIT" "$ZINIT/bin"
-        source $ZINIT/bin/zinit.zsh
-        zinit module build
     else
-        echo "ERROR: please install git before installation !!"
+        echo "ERROR: please install git before installation!!"
+        exit 1
     fi
     if [ ! $? -eq 0 ]; then
         echo ""
-        echo "ERROR: downloading zinit ($ZINIT_GIT) failed !!"
-        rm -rf $ZINIT
+        echo "ERROR: downloading zinit ($ZINIT_GIT) failed!!"
+        exit 1
     fi;
 fi
 
@@ -72,7 +71,7 @@ fi
 ## lsd
 if [ ! -x "$(which lsd)" ]; then
     zinit ice lucid as"command" from"gh-r" bpick"$PICK" mv"lsd* -> lsd" pick"lsd/lsd"
-    zinit light Peltoche/lsd
+    zinit light lsd-rs/lsd
 fi
 ## bat
 if [ ! -x "$(which bat)" ]; then
