@@ -1,118 +1,101 @@
-# Check if zinit is installed
-ZINIT="$HOME/.zinit"
-ZINIT_GIT="https://github.com/zdharma-continuum/zinit.git"
+# Check if zi is installed
+ZI="$HOME/.zi"
+ZI_GIT="https://github.com/z-shell/zi.git"
 
-if [ ! -d "$ZINIT" ]; then
-    echo "Installing zinit ..."
+if [ ! -d "$ZI" ]; then
+    echo "Installing zi ..."
     if [ -x "$(which git)" ]; then
-        mkdir -p "$ZINIT" 2> /dev/null
-        git clone "$ZINIT_GIT" "$ZINIT/bin"
+        mkdir -p "$ZI" 2> /dev/null
+        git clone "$ZI_GIT" "$ZI/bin"
     else
         echo "ERROR: please install git before installation!!"
         exit 1
     fi
     if [ ! $? -eq 0 ]; then
         echo ""
-        echo "ERROR: downloading zinit ($ZINIT_GIT) failed!!"
+        echo "ERROR: downloading zi ($ZI_GIT) failed!!"
         exit 1
     fi;
 fi
 
-# Load zinit
-source $ZINIT/bin/zinit.zsh
+# Load zi
+source $ZI/bin/zi.zsh
 
-# zinit related
-zinit light zdharma-continuum/zinit-annex-submods
+# zi related
+zi light z-shell/z-a-submods
 
 # Environment
 ## environment
-zinit ice svn silent
-zinit snippet PZT::modules/environment
+zi ice svn silent
+zi snippet PZT::modules/environment
 ## editor
-zinit ice svn silent
-zinit snippet PZT::modules/editor
+zi ice svn silent
+zi snippet PZT::modules/editor
 ## terminal
-zinit ice svn silent
-zinit snippet PZT::modules/terminal
+zi ice svn silent
+zi snippet PZT::modules/terminal
 ## directory
-zinit ice svn silent
-zinit snippet PZT::modules/directory
+zi ice svn silent
+zi snippet PZT::modules/directory
 ## history
-zinit ice svn silent
-zinit snippet PZT::modules/history
+zi ice svn silent
+zi snippet PZT::modules/history
 ## LS_COLORS
-zinit ice lucid atclone"dircolors -b LS_COLORS > clrs.zsh" \
-    atpull'%atclone' pick"clrs.zsh" nocompile'!' \
-    atload'zstyle ":completion:*" list-colors “${(s.:.)LS_COLORS}”'
-zinit light trapd00r/LS_COLORS
+zi pack for ls_colors
 
 # Prompt
-zinit ice lucid pick"async.zsh" src"pure.zsh"
-zinit light sindresorhus/pure
+zi ice lucid pick"async.zsh" src"pure.zsh"
+zi light sindresorhus/pure
 
 # Utility
 ## alias
-zinit ice lucid
-zinit load zimfw/utility
+zi ice lucid
+zi load zimfw/utility
 ## alias-tips
-zinit ice wait lucid
-zinit load djui/alias-tips
+zi ice wait lucid
+zi load djui/alias-tips
 ## zsh-autopair
-zinit ice wait lucid
-zinit load hlissner/zsh-autopair
+zi ice wait lucid
+zi load hlissner/zsh-autopair
 ## archive
-zinit ice svn silent pick""
-zinit snippet PZT::modules/archive
+zi ice svn silent pick""
+zi snippet PZT::modules/archive
 ## fzf
-if [ ! -x "$(which fzf)" ]; then
-    zinit ice from"gh-r" as"program"
-    zinit light junegunn/fzf-bin
-fi
+zi ice from"gh-r" as"program"
+zi light junegunn/fzf-bin
 ## lsd
-if [ ! -x "$(which lsd)" ]; then
-    zinit ice lucid as"command" from"gh-r" bpick"$PICK" mv"lsd* -> lsd" pick"lsd/lsd"
-    zinit light lsd-rs/lsd
-fi
+zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"lsd* -> lsd" pick"lsd/lsd"
+zi light lsd-rs/lsd
 ## bat
-if [ ! -x "$(which bat)" ]; then
-    zinit ice lucid as"command" from"gh-r" bpick"$PICK" mv"bat* -> bat" pick"bat/bat"
-    zinit light sharkdp/bat
-fi
+zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"bat* -> bat" pick"bat/bat"
+zi light sharkdp/bat
 ## fd
-if [ ! -x "$(which fd)" ]; then
-    zinit ice lucid as"command" from"gh-r" bpick"$PICK" mv"fd* -> fd" pick"fd/fd"
-    zinit light sharkdp/fd
-fi
+zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"fd* -> fd" pick"fd/fd"
+zi light sharkdp/fd
 ## rg
-if [ ! -x "$(which rg)" ]; then
-    zinit ice lucid as"command" from"gh-r" bpick"$PICK" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
-    zinit light BurntSushi/ripgrep
-fi
+zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
+zi light BurntSushi/ripgrep
 ## delta
-if [ ! -x "$(which delta)" ]; then
-    zinit ice lucid as"command" from"gh-r" bpick"$PICK" mv"delta* -> delta" pick"delta/delta"
-    zinit light dandavison/delta
-fi
+zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"delta* -> delta" pick"delta/delta"
+zi light dandavison/delta
 ## forgit
-zinit ice wait lucid
-zinit load wfxr/forgit
+zi ice wait lucid
+zi load wfxr/forgit
 ## formarks
-zinit ice wait lucid
-zinit load wfxr/formarks
+zi ice wait lucid
+zi load wfxr/formarks
 
 # Fish like feature
 ## completion
-zinit ice svn silent submods"zsh-users/zsh-completions -> external"
-zinit snippet PZT::modules/completion
+zi ice svn silent submods"zsh-users/zsh-completions -> external"
+zi snippet PZT::modules/completion
 ## autosuggestions
-zinit ice svn silent submods"zsh-users/zsh-autosuggestions -> external"
-zinit snippet PZT::modules/autosuggestions
+zi ice svn silent submods"zsh-users/zsh-autosuggestions -> external"
+zi snippet PZT::modules/autosuggestions
 ## history-substring-search
-zinit ice svn silent submods"zsh-users/zsh-history-substring-search -> external"
-zinit snippet PZT::modules/history-substring-search
+zi ice svn silent submods"zsh-users/zsh-history-substring-search -> external"
+zi snippet PZT::modules/history-substring-search
 ## history-search-multi-word
-zinit ice wait"1" lucid
-zinit load zdharma-continuum/history-search-multi-word
+zi load z-shell/H-S-MW
 ## fast-syntax-highlighting
-zinit ice wait"1" lucid atinit"ZINIT[COMPINIT_OPTS]=-C; zpcompinit; zpcdreplay"
-zinit light zdharma-continuum/fast-syntax-highlighting
+zi light z-shell/F-Sy-H
