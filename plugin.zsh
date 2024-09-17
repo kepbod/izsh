@@ -52,8 +52,8 @@ zi load djui/alias-tips
 ## zsh-autopair
 zi ice wait lucid
 zi load hlissner/zsh-autopair
-## archive
-zi snippet PZTM::archive
+## extract 
+zi snippet OMZP::extract
 ## fzf
 zi ice from"gh-r" as"program"
 zi light junegunn/fzf-bin
