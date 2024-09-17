@@ -26,20 +26,15 @@ zi light z-shell/z-a-submods
 
 # Environment
 ## environment
-zi ice svn silent
-zi snippet PZT::modules/environment
+zi snippet PZTM::environment
 ## editor
-zi ice svn silent
-zi snippet PZT::modules/editor
+zi snippet PZTM::editor
 ## terminal
-zi ice svn silent
-zi snippet PZT::modules/terminal
+zi snippet PZTM::terminal
 ## directory
-zi ice svn silent
-zi snippet PZT::modules/directory
+zi snippet PZTM::directory
 ## history
-zi ice svn silent
-zi snippet PZT::modules/history
+zi snippet PZTM::history
 ## LS_COLORS
 zi pack for ls_colors
 
@@ -58,8 +53,7 @@ zi load djui/alias-tips
 zi ice wait lucid
 zi load hlissner/zsh-autopair
 ## archive
-zi ice svn silent pick""
-zi snippet PZT::modules/archive
+zi snippet PZTM::archive
 ## fzf
 zi ice from"gh-r" as"program"
 zi light junegunn/fzf-bin
@@ -87,14 +81,14 @@ zi load wfxr/formarks
 
 # Fish like feature
 ## completion
-zi ice svn silent submods"zsh-users/zsh-completions -> external"
-zi snippet PZT::modules/completion
+zi ice silent submods"zsh-users/zsh-completions -> external"
+zi snippet PZTM::completion
 ## autosuggestions
-zi ice svn silent submods"zsh-users/zsh-autosuggestions -> external"
-zi snippet PZT::modules/autosuggestions
+zi ice silent submods"zsh-users/zsh-autosuggestions -> external"
+zi snippet PZTM::autosuggestions
 ## history-substring-search
-zi ice svn silent submods"zsh-users/zsh-history-substring-search -> external"
-zi snippet PZT::modules/history-substring-search
+zi ice silent submods"zsh-users/zsh-history-substring-search -> external"
+zi snippet PZTM::history-substring-search
 ## history-search-multi-word
 zi load z-shell/H-S-MW
 ## fast-syntax-highlighting
