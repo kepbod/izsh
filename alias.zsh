@@ -1,6 +1,7 @@
 # alias
-alias vi="vim -X"
+alias vi="nvim"
 alias tmux="tmux -2"
+alias r="radian"
 alias wc="wc -l"
 alias top="htop"
 alias ls="lsd"
@@ -13,3 +14,4 @@ alias rm="rm -i"
 alias mv="mv -i"
 alias cp="cp -i"
 alias ln="ln -i"
+alias ssh="tssh"

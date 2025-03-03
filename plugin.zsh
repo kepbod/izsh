@@ -22,7 +22,7 @@ fi
 source $ZI/bin/zi.zsh
 
 # zi related
-zi light z-shell/z-a-submods
+zi light-mode for z-shell/z-a-meta-plugins @annexes
 
 # Environment
 ## environment
@@ -39,8 +39,9 @@ zi snippet PZTM::history
 zi pack for ls_colors
 
 # Prompt
-zi ice lucid pick"async.zsh" src"pure.zsh"
-zi light sindresorhus/pure
+zi lucid for pick"/dev/null" multisrc"{async,pure}.zsh" \
+atload"!prompt_pure_precmd" nocd \
+  sindresorhus/pure
 
 # Utility
 ## alias
@@ -81,8 +82,10 @@ zi load wfxr/formarks
 
 # Fish like feature
 ## completion
-zi ice silent submods"zsh-users/zsh-completions -> external"
+zi ice silent blockf submods"zsh-uases/zsh-completions -> external"
 zi snippet PZTM::completion
+zi ice blockf as"completion"
+zi light conda-incubator/conda-zsh-completion
 ## autosuggestions
 zi ice silent submods"zsh-users/zsh-autosuggestions -> external"
 zi snippet PZTM::autosuggestions
