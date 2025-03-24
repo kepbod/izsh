@@ -1,30 +1,45 @@
-# Vi mode
-zstyle ':prezto:module:editor' key-bindings 'vi'
+# Add some keybindings
+for keymap in 'emacs' 'viins'; do
+    bindkey '^A' beginning-of-line
+    bindkey '^E' end-of-line
+    bindkey '^F' vi-forward-word
+    bindkey '^B' vi-backward-word
+done
 
-# Auto convert .... to ../..
-zstyle ':prezto:module:editor' dot-expansion 'yes'
+# Enable surround
+autoload -Uz surround
+zle -N delete-surround surround
+zle -N add-surround surround
+zle -N change-surround surround
+bindkey -a cs change-surround
+bindkey -a ds delete-surround
+bindkey -a ys add-surround
+bindkey -M visual S add-surround
 
-# Auto set the tab and window titles.
-zstyle ':prezto:module:terminal' auto-title 'yes'
+# Enable select-quoted
+autoload -U select-quoted
+zle -N select-quoted
+for m in visual viopp; do
+    for c in {a,i}{\',\",\`}; do
+        bindkey -M $m $c select-quoted
+    done
+done
 
-# Set the window title format.
-zstyle ':prezto:module:terminal:window-title' format '%n@%m: %s'
+# Enable select-bracketed
+autoload -U select-bracketed
+zle -N select-bracketed
+for m in visual viopp; do
+    for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+        bindkey -M $m $c select-bracketed
+    done
+done
 
-# Set the tab title format.
-zstyle ':prezto:module:terminal:tab-title' format '%m: %s'
+# Enable cdr
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
 
-# Set the terminal multiplexer title format.
-zstyle ':prezto:module:terminal:multiplexer-title' format '%s'
-
-# Enable fast vi-mode
-KEYTIMEOUT=1
-
-# Platform
-if [[ "$(uname)" == "Darwin" ]]; then
-PICK="*darwin*"
-alias dircolors="gdircolors"
-elif [[ "$(uname)" == "Linux" ]]; then
-PICK="*musl*"
-elif [[ "$(uname)" == "MINGW32_NT" ]]; then
-PICK="*windows*"
-fi
+# Configure fzf-tab
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':fzf-tab:*' prefix ''
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':fzf-tab:*' switch-group ',' '.'

@@ -1,12 +1,12 @@
 # Check if zi is installed
-ZI="$HOME/.zi"
+ZI="$HOME/.zi/bin"
 ZI_GIT="https://github.com/z-shell/zi.git"
 
-if [ ! -d "$ZI" ]; then
+if [ ! -f "$ZI/zi.zsh" ]; then
     echo "Installing zi ..."
     if [ -x "$(which git)" ]; then
         mkdir -p "$ZI" 2> /dev/null
-        git clone "$ZI_GIT" "$ZI/bin"
+        git clone "$ZI_GIT" "$ZI"
     else
         echo "ERROR: please install git before installation!!"
         exit 1
@@ -19,10 +19,11 @@ if [ ! -d "$ZI" ]; then
 fi
 
 # Load zi
-source $ZI/bin/zi.zsh
+source $ZI/zi.zsh
 
-# zi related
-zi light-mode for z-shell/z-a-meta-plugins @annexes
+# Enable zsh completion system
+autoload -Uz _zi
+(( ${+_comps} )) && _comps[zi]=_zi
 
 # Environment
 ## environment
@@ -36,63 +37,67 @@ zi snippet PZTM::directory
 ## history
 zi snippet PZTM::history
 ## LS_COLORS
-zi pack for ls_colors
+zi ice wait lucid from'gh-r' as'program' bpick"$PICK" mv'vivid* -> vivid' pick"vivid/vivid" \
+  atload'export LS_COLORS="$(vivid generate jellybeans)"'
+zi light sharkdp/vivid
 
 # Prompt
-zi lucid for pick"/dev/null" multisrc"{async,pure}.zsh" \
-atload"!prompt_pure_precmd" nocd \
-  sindresorhus/pure
+zi ice pick"async.zsh" src"pure.zsh"
+zi light sindresorhus/pure
 
 # Utility
 ## alias
 zi ice lucid
 zi load zimfw/utility
-## alias-tips
-zi ice wait lucid
-zi load djui/alias-tips
+## zsh-you-should-use
+zi light MichaelAquilina/zsh-you-should-use
 ## zsh-autopair
-zi ice wait lucid
+zi ice wait lucid pick'autopair.zsh'
 zi load hlissner/zsh-autopair
 ## extract 
 zi snippet OMZP::extract
 ## fzf
 zi ice from"gh-r" as"program"
-zi light junegunn/fzf-bin
+zi light junegunn/fzf
 ## lsd
-zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"lsd* -> lsd" pick"lsd/lsd"
+zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"lsd* -> lsd" pick"lsd/lsd" \
+  atclone"zi creinstall -q lsd-rs/lsd"
 zi light lsd-rs/lsd
 ## bat
-zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"bat* -> bat" pick"bat/bat"
+zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"bat* -> bat" pick"bat/bat" \
+  atclone"bat/bat --completion zsh > _bat; zi creinstall -q sharkdp/bat"
 zi light sharkdp/bat
 ## fd
-zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"fd* -> fd" pick"fd/fd"
+zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"fd* -> fd" pick"fd/fd" \
+  atclone"zi creinstall -q sharkdp/fd"
 zi light sharkdp/fd
 ## rg
-zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"ripgrep* -> ripgrep" pick"ripgrep/rg"
+zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"ripgrep* -> ripgrep" pick"ripgrep/rg" \
+  atclone"zi creinstall -q BurntSushi/ripgrep"
 zi light BurntSushi/ripgrep
-## delta
-zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"delta* -> delta" pick"delta/delta"
-zi light dandavison/delta
 ## forgit
 zi ice wait lucid
 zi load wfxr/forgit
+## delta
+zi ice lucid as"command" from"gh-r" bpick"$PICK" mv"delta* -> delta" pick"delta/delta"
+zi light dandavison/delta
 ## formarks
 zi ice wait lucid
 zi load wfxr/formarks
 
 # Fish like feature
-## completion
-zi ice silent blockf submods"zsh-uases/zsh-completions -> external"
-zi snippet PZTM::completion
-zi ice blockf as"completion"
-zi light conda-incubator/conda-zsh-completion
-## autosuggestions
-zi ice silent submods"zsh-users/zsh-autosuggestions -> external"
-zi snippet PZTM::autosuggestions
-## history-substring-search
-zi ice silent submods"zsh-users/zsh-history-substring-search -> external"
-zi snippet PZTM::history-substring-search
-## history-search-multi-word
-zi load z-shell/H-S-MW
-## fast-syntax-highlighting
-zi light z-shell/F-Sy-H
+## F-Sy-H, H-S-MW, and zsh-autosuggestions
+zi wait lucid for \
+  atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    z-shell/F-Sy-H \
+    z-shell/H-S-MW \
+  atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions
+## completion system using fzf
+zi ice lucid wait has'fzf'
+zi light Aloxaf/fzf-tab
+zi ice lucid wait has'fzf'
+zi light Freed-Wu/fzf-tab-source 
+## completions for conda
+zi ice lucid wait as'completion' blockf has'conda'
+zi snippet https://github.com/conda-incubator/conda-zsh-completion/blob/main/_conda
