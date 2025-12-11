@@ -1,5 +1,7 @@
 # Add some keybindings
 for keymap in 'emacs' 'viins'; do
+    bindkey '^N' history-substring-search-down
+    bindkey '^P' history-substring-search-up
     bindkey '^A' beginning-of-line
     bindkey '^E' end-of-line
     bindkey '^F' vi-forward-word

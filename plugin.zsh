@@ -86,8 +86,9 @@ zi ice wait lucid
 zi load wfxr/formarks
 
 # Fish like feature
-## F-Sy-H, H-S-MW, and zsh-autosuggestions
+## zsh-history-substring-search, F-Sy-H, H-S-MW, and zsh-autosuggestions
 zi wait lucid for \
+  zsh-users/zsh-history-substring-search \
   atinit"ZI[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
     z-shell/F-Sy-H \
     z-shell/H-S-MW \
